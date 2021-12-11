@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller\index;
+namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -16,6 +16,8 @@ class IndexController extends AbstractController
     #[Route(path: '/', name: 'index')]
     public function get(): Response
     {
-        return $this->render('index/index.html.twig');
+        return $this->render('index/index.html.twig', [
+            'title' => 'Accueil'
+        ]);
     }
 }

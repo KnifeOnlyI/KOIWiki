@@ -1,0 +1,8 @@
+{% if title is defined %}
+    <header class="text-center">
+        <h1>{{ title }}</h1>
+        {% if subtitle is defined %}<h2>{{ subtitle }}</h2>{% endif %}
+    </header>
+
+    <hr>
+{% endif %}
