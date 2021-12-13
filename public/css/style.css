@@ -1,0 +1,10 @@
+.hljs-ln-numbers {
+    text-align: left;
+    color: black;
+    border-right: 1px solid #CCC;
+    vertical-align: top;
+}
+
+.hljs-ln-line {
+    margin-left: 5px;
+}

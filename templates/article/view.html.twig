@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div>Créé le {{ article.createdAt|date('d/m/Y') }}</div>
+    {% if article.lastUpdatedAt %}
+        <div>Mis à jour le {{ article.lastUpdatedAt|date('d/m/Y') }}</div>
+    {% endif %}
+
+    Catégorie : {{ article.category.name }}
+
+    <hr>
+
+    {% if canDelete or canEdit %}
+        <div class="row">
+            <div class="col-12 text-end">
+                {% if canDelete %}
+                    <a class="btn btn-danger" href="{{ path('delete_article', {'id': article.id}) }}">Delete</a>
+                {% endif %}
+                {% if canEdit %}
+                    <a class="btn btn-secondary" href="{{ path('edit_article', {'id': article.id}) }}">Edit</a>
+                {% endif %}
+            </div>
+        </div>
+
+        <hr>
+    {% endif %}
+
+    {{ article.content|markdown_to_html }}
+{% endblock %}
+
+{% block js %}
+    <script>
+        hljs.highlightAll();
+        hljs.initLineNumbersOnLoad();
+    </script>
+{% endblock %}

@@ -2,12 +2,15 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <title>{% if title is defined %}KOI Wiki - {{ title }}{% else %}KOI Wiki{% endif %}</title>
+    <title>{{ app_name }}{% if title is defined %} - {{ title }}{% endif %}</title>
     <link rel="icon"
           href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
     {# Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX #}
 
     <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/simplemde.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/highlightjs.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
 
     {% block stylesheets %}
         {{ encore_entry_link_tags('app') }}
@@ -30,6 +33,12 @@
     {% include 'base/flash.html.twig' %}
 
     {% block body %}{% endblock %}
+
+    <script src="{{ asset('js/simplemde.min.js') }}"></script>
+    <script src="{{ asset('js/highlightjs.min.js') }}"></script>
+    <script src="{{ asset('js/highlightjs-line-number.min.js') }}"></script>
+
+    {% block js %}{% endblock %}
 </div>
 </body>
 </html>

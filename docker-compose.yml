@@ -1,23 +1,24 @@
 version: '2'
 services:
-  koi-wiki-app:
-    build: .
-    depends_on:
-      - koi-wiki-postgresql
-    environment:
-      - APP_ENV=prod
-      - APP_SECRET=${APP_SECRET}
-      - DATABASE_URL=postgresql://${DATABASE_USER}:${DATABASE_PASSWORD}@koi-wiki-postgresql:5432/${DATABASE_NAME}?serverVersion=14.1&charset=utf8
-      - MAILER_DSN=smtp://${SENDER_EMAIL_USER}:${SENDER_EMAIL_PASSWORD}@${SENDER_EMAIL_HOST}:${SENDER_EMAIL_PORT}?verify_peer=0
-    ports:
-      - ${PORT}:80
+    koi-wiki-app:
+        build: .
+        depends_on:
+            - koi-wiki-postgresql
+        environment:
+            - APP_ENV=prod
+            - APP_SECRET=${APP_SECRET}
+            - DATABASE_URL=postgresql://${DATABASE_USER}:${DATABASE_PASSWORD}@koi-wiki-postgresql:5432/${DATABASE_NAME}?serverVersion=14.1&charset=utf8
+            - MAILER_DSN=smtp://${EMAIL_SENDER_USER}:${EMAIL_SENDER_PASSWORD}@${EMAIL_SENDER_HOST}:${EMAIL_SENDER_PORT}?verify_peer=0
+            - EMAIL_SENDER_USER=${EMAIL_SENDER_USER}
+        ports:
+            - ${PORT}:80
 
-  koi-wiki-postgresql:
-    image: postgres:14.1
-    volumes:
-      - ~/.volumes/koi-wiki/postgresql/:/var/lib/postgresql/data/
-      - ~/.volumes/koi-wiki/backups/:/opt/
-    environment:
-      - POSTGRES_USER=${DATABASE_USER}
-      - POSTGRES_PASSWORD=${DATABASE_PASSWORD}
-      - POSTGRES_HOST_AUTH_METHOD=trust
+    koi-wiki-postgresql:
+        image: postgres:14.1
+        volumes:
+            - ~/.volumes/koi-wiki/postgresql/:/var/lib/postgresql/data/
+            - ~/.volumes/koi-wiki/backups/:/opt/
+        environment:
+            - POSTGRES_USER=${DATABASE_USER}
+            - POSTGRES_PASSWORD=${DATABASE_PASSWORD}
+            - POSTGRES_HOST_AUTH_METHOD=trust

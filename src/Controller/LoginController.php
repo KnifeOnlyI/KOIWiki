@@ -7,8 +7,20 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
+/**
+ * Controller to manage login
+ *
+ * @author Dany Pignoux <dany.pignoux@outlook.fr>
+ */
 class LoginController extends AbstractController
 {
+    /**
+     * Page to manage login page
+     *
+     * @param AuthenticationUtils $authenticationUtils The authentication utils
+     *
+     * @return Response The response
+     */
     #[Route('/login', name: 'login')]
     public function index(AuthenticationUtils $authenticationUtils): Response
     {
