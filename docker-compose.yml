@@ -6,6 +6,7 @@ services:
             - koi-wiki-postgresql
         environment:
             - APP_ENV=prod
+            - APP_NAME=${APP_NAME}
             - APP_SECRET=${APP_SECRET}
             - DATABASE_URL=postgresql://${DATABASE_USER}:${DATABASE_PASSWORD}@koi-wiki-postgresql:5432/${DATABASE_NAME}?serverVersion=14.1&charset=utf8
             - MAILER_DSN=smtp://${EMAIL_SENDER_USER}:${EMAIL_SENDER_PASSWORD}@${EMAIL_SENDER_HOST}:${EMAIL_SENDER_PORT}?verify_peer=0
