@@ -1,10 +1,72 @@
-.hljs-ln-numbers {
+/* Titles in articles content *************************************************************************************** */
+
+.article-content h1 {
+    text-align: center;
+    font-size: 2rem;
+}
+
+.article-content h2 {
+    font-size: 1.75rem;
+}
+
+.article-content h3 {
+    font-style: italic;
+    font-size: 1.5rem;
+}
+
+.article-content h4 {
+    font-style: italic;
+    font-size: 1.25rem;
+}
+
+/* Tables in articles content *************************************************************************************** */
+
+.article-content table:not(code table) {
+    font-family: Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+.article-content td:not(.hljs-ln-numbers, .hljs-ln-code), .article-content th {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+.article-content th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: center;
+    background-color: #04AA6D;
+    color: white;
+}
+
+/* Blockquotes in articles content ********************************************************************************** */
+
+.article-content img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    max-height: 500px;
+}
+
+.article-content blockquote {
+    font-style: italic;
+    margin-left: 32px;
+    font-family: "Segoe Print", "Times New Roman", Verdana, serif;
+    padding-left: 48px;
+    background: url('/images/blockquote.png') no-repeat;
+    min-height: 30px;
+}
+
+/* Source code in articles content ********************************************************************************** */
+
+.article-content .hljs-ln-numbers {
     text-align: left;
     color: black;
     border-right: 1px solid #CCC;
     vertical-align: top;
 }
 
-.hljs-ln-line {
+.article-content .hljs-ln-line {
     margin-left: 5px;
 }
