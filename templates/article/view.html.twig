@@ -1,5 +1,24 @@
 {% extends 'base.html.twig' %}
 
+{% block meta %}
+    {% set page_url = absolute_url(path('get_article', {'id': article.id})) %}
+
+    <!-- Open Graph meta tags -->
+    <meta property="og:title" content="{{ article.title }}">
+    <meta property="og:description" content="{{ article.description }}">
+    <meta property="og:url" content="{{ page_url }}">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="{{ absolute_url(asset('favicon.ico')) }}">
+
+    <!-- Twitter meta tags -->
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="{{ article.title }}">
+    <meta name="twitter:description" content="{{ article.description }}">
+    <meta name="twitter:url" content="{{ page_url }}">
+    <meta name="twitter:image" content="{{ absolute_url(asset('favicon.ico')) }}">
+    <meta name="twitter:image:alt" content="Website logo">
+{% endblock %}
+
 {% block body %}
     <div>Créé le {{ article.createdAt|date('d/m/Y') }}</div>
     {% if article.lastUpdatedAt %}

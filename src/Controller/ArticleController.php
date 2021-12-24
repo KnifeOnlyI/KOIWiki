@@ -179,6 +179,7 @@ class ArticleController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $article->setTitle($form['title']->getData());
             $article->setCategory($form['category']->getData());
+            $article->setDescription($form['description']->getData());
             $article->setContent($form['content']->getData());
             $article->setIsPublic($form['isPublic']->getData());
             $article->setLastUpdatedAt(new DateTimeImmutable());
