@@ -16,7 +16,7 @@
                 <td>{{ article.title }}</td>
                 <td>{{ article.createdAt|date('d/m/Y') }}</td>
                 <td>{{ article.lastUpdatedAt|date('d/m/Y') }}</td>
-                <td><a href="{{ path('get_all_articles_by_category_articles', {'id': article.category.id}) }}"><span class="badge bg-secondary">{{ article.category.name|capitalize }}</span></a></td>
+                <td><a href="{{ path('get_all_articles', {'category': article.category.id}) }}"><span class="badge bg-secondary">{{ article.category.name|capitalize }}</span></a></td>
                 <td>
                     {% if app.user and (app.user.userIdentifier == article.author.userIdentifier or 'ROLE_ARTICLE_DELETE_PRIVATE' in app.user.roles) %}
                         <a href="{{ path('delete_article', {'id': article.id}) }}" class="btn btn-danger">Supprimer</a>

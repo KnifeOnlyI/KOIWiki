@@ -47,45 +47,41 @@ class ArticleController extends AbstractController
     }
 
     /**
-     * Get all articles
+     * Get all articles (by category if specified
+     *
+     * @param Request $request The request
      *
      * @return Response The response
      */
     #[Route(path: '/article', name: 'get_all_articles', methods: ['GET'])]
-    public function getAll(): Response
+    public function getAll(Request $request): Response
     {
-        return $this->render('article/list.html.twig', [
-            'title' => 'Tous les articles',
-            'articles' => $this->getAllArticlesForConnectedUser()
-        ]);
-    }
-
-    /**
-     * Get all article of the specified category
-     *
-     * @return Response The response
-     */
-    #[Route(path: '/article/category/{id}', name: 'get_all_articles_by_category_articles', methods: ['GET'])]
-    public function getAllByCategory(int $id): Response
-    {
-        $category = $this->articleCategoryRepository->find($id);
-
-        if (!$category) {
-            throw $this->createNotFoundException();
-        }
-
+        $title = 'Tous les articles';
+        $articles = [];
         $articlesTMP = $this->getAllArticlesForConnectedUser();
 
-        $articles = [];
+        $categoryId = $request->query->getInt('category');
 
-        foreach ($articlesTMP as $article) {
-            if ($article->getCategory()->getId() == $id) {
-                $articles[] = $article;
+        if ($categoryId) {
+            $category = $this->articleCategoryRepository->find($categoryId);
+
+            if (!$category) {
+                throw $this->createNotFoundException();
             }
+
+            $title = 'Articles de la catégorie : ' . $category->getName();
+
+            foreach ($articlesTMP as $article) {
+                if ($article->getCategory()->getId() == $category->getId()) {
+                    $articles[] = $article;
+                }
+            }
+        } else {
+            $articles = $articlesTMP;
         }
 
         return $this->render('article/list.html.twig', [
-            'title' => 'Articles dans la catégorie : ' . $category->getName(),
+            'title' => $title,
             'articles' => $articles
         ]);
     }
