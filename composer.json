@@ -32,7 +32,8 @@
         "symfony/yaml": "6.0.*",
         "symfonycasts/verify-email-bundle": "^1.7",
         "twig/extra-bundle": "^3.3",
-        "twig/markdown-extra": "^3.3"
+        "twig/markdown-extra": "^3.3",
+        "twig/twig": "^2.12|^3.0"
     },
     "config": {
         "allow-plugins": {
