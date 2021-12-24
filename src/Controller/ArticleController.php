@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Article;
 use App\Entity\User;
 use App\Form\ArticleFormType;
+use App\Repository\ArticleCategoryRepository;
 use App\Repository\ArticleRepository;
 use App\Service\UserService;
 use DateTimeImmutable;
@@ -32,11 +33,13 @@ class ArticleController extends AbstractController
      * Create a new article controller
      *
      * @param ArticleRepository $articleRepository The article repository
+     * @param ArticleCategoryRepository $articleCategoryRepository The article category repository
      * @param ManagerRegistry $managerRegistry The manager registry
      * @param UserService $userService The user service
      */
     public function __construct(
         private ArticleRepository $articleRepository,
+        private ArticleCategoryRepository $articleCategoryRepository,
         private ManagerRegistry $managerRegistry,
         private UserService $userService
     ) {
@@ -51,18 +54,38 @@ class ArticleController extends AbstractController
     #[Route(path: '/article', name: 'get_all_articles', methods: ['GET'])]
     public function getAll(): Response
     {
-        if ($this->getUser()) {
-            if ($this->userService->hasRole($this->getUser(), 'ARTICLE', 'VIEW_PRIVATE')) {
-                $articles = $this->articleRepository->findAll();
-            } else {
-                $articles = $this->articleRepository->getAllForUser($this->getUser());
+        return $this->render('article/list.html.twig', [
+            'title' => 'Tous les articles',
+            'articles' => $this->getAllArticlesForConnectedUser()
+        ]);
+    }
+
+    /**
+     * Get all article of the specified category
+     *
+     * @return Response The response
+     */
+    #[Route(path: '/article/category/{id}', name: 'get_all_articles_by_category_articles', methods: ['GET'])]
+    public function getAllByCategory(int $id): Response
+    {
+        $category = $this->articleCategoryRepository->find($id);
+
+        if (!$category) {
+            throw $this->createNotFoundException();
+        }
+
+        $articlesTMP = $this->getAllArticlesForConnectedUser();
+
+        $articles = [];
+
+        foreach ($articlesTMP as $article) {
+            if ($article->getCategory()->getId() == $id) {
+                $articles[] = $article;
             }
-        } else {
-            $articles = $this->articleRepository->getAllForAnonymousUser();
         }
 
         return $this->render('article/list.html.twig', [
-            'title' => 'Tous les articles',
+            'title' => 'Articles dans la catégorie : ' . $category->getName(),
             'articles' => $articles
         ]);
     }
@@ -231,6 +254,26 @@ class ArticleController extends AbstractController
         $this->addFlash('success', 'L\'article a été supprimé');
 
         return $this->redirectToRoute('get_all_articles');
+    }
+
+    /**
+     * Get all articles for the connected user
+     *
+     * @return Article[] The founded articles
+     */
+    private function getAllArticlesForConnectedUser(): array
+    {
+        if ($this->getUser()) {
+            if ($this->userService->hasRole($this->getUser(), 'ARTICLE', 'VIEW_PRIVATE')) {
+                $articles = $this->articleRepository->findAll();
+            } else {
+                $articles = $this->articleRepository->getAllForUser($this->getUser());
+            }
+        } else {
+            $articles = $this->articleRepository->getAllForAnonymousUser();
+        }
+
+        return $articles;
     }
 
     /**
