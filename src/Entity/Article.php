@@ -26,7 +26,8 @@ class Article
     private $title;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=160)
+     * @Assert\Length(max=160)
      */
     private $description;
 

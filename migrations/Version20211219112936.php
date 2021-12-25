@@ -28,7 +28,7 @@ final class Version20211219112936 extends AbstractMigration
             author_id INT DEFAULT NULL, 
             category_id INT NOT NULL, 
             title VARCHAR(255) NOT NULL, 
-            description VARCHAR(255), 
+            description VARCHAR(160), 
             content TEXT NOT NULL, 
             created_at TIMESTAMP(0) WITHOUT TIME ZONE NOT NULL, 
             last_updated_at TIMESTAMP(0) WITHOUT TIME ZONE DEFAULT NULL, 
