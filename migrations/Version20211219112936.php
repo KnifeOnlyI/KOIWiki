@@ -30,10 +30,11 @@ final class Version20211219112936 extends AbstractMigration
             title VARCHAR(255) NOT NULL, 
             description VARCHAR(160), 
             content TEXT NOT NULL, 
+            image_url TEXT,
             created_at TIMESTAMP(0) WITHOUT TIME ZONE NOT NULL, 
             last_updated_at TIMESTAMP(0) WITHOUT TIME ZONE DEFAULT NULL, 
-            is_public BOOLEAN NOT NULL, PRIMARY KEY(id))'
-        );
+            is_public BOOLEAN NOT NULL, PRIMARY KEY(id)
+        )');
         $this->addSql('CREATE INDEX IDX_23A0E66F675F31B ON article (author_id)');
         $this->addSql('CREATE INDEX IDX_23A0E6612469DE2 ON article (category_id)');
         $this->addSql('COMMENT ON COLUMN article.created_at IS \'(DC2Type:datetime_immutable)\'');
@@ -41,8 +42,9 @@ final class Version20211219112936 extends AbstractMigration
         $this->addSql('CREATE TABLE article_category (
             id INT NOT NULL, 
             name VARCHAR(255) NOT NULL, 
-            PRIMARY KEY(id))'
-        );
+            image_url TEXT, 
+            PRIMARY KEY(id)
+        )');
         $this->addSql('CREATE TABLE "user" (
             id INT NOT NULL, 
             email VARCHAR(180) NOT NULL, 

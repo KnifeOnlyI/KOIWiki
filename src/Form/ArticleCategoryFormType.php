@@ -26,6 +26,7 @@ class ArticleCategoryFormType extends AbstractType
     {
         $builder
             ->add('name', TextType::class, ['label' => 'Nom'])
+            ->add('imageUrl', TextType::class, ['label' => 'URL de l\'image d\'illustration', 'required' => false, 'empty_data' => null])
             ->add('save', SubmitType::class, ['label' => 'Confirmer']);
     }
 

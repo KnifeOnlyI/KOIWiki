@@ -42,7 +42,7 @@
 
 /* Blockquotes in articles content ********************************************************************************** */
 
-.article-content img {
+.article-content img, .article-illustration img {
     display: block;
     margin-left: auto;
     margin-right: auto;

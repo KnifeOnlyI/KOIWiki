@@ -1,15 +1,20 @@
 {% extends 'base.html.twig' %}
 
 {% block meta %}
+    {% set favicon = absolute_url(asset('favicon.ico')) %}
+    {% set image = (article.imageUrl ? article.imageUrl : (article.category.imageUrl ? article.category.imageUrl : favicon)) %}
+
     <meta name="description" content="{{ article.description }}">
 
     <!-- Open Graph meta tags -->
     <meta property="og:title" content="{{ article.title }}">
     <meta property="og:description" content="{{ article.description }}">
+    <meta property="og:image" content="{{ image }}">
 
     <!-- Twitter meta tags -->
     <meta name="twitter:title" content="{{ article.title }}">
     <meta name="twitter:description" content="{{ article.description }}">
+    <meta name="twitter:image" content="{{ image }}">
 {% endblock %}
 
 {% block body %}
@@ -35,6 +40,14 @@
         </div>
 
         <hr>
+    {% endif %}
+
+    {% if article.imageUrl %}
+        <div class="article-illustration">
+            <img src="{{ article.imageUrl }}" alt="Image d'illustration de l'article">
+        </div>
+
+        <br>
     {% endif %}
 
     <div class="article-content" id="article-content">{{ article.content|markdown_to_html }}</div>

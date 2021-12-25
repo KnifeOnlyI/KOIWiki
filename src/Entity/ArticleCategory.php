@@ -24,6 +24,11 @@ class ArticleCategory
      */
     private ?string $name;
 
+    /**
+     * @ORM\Column(type="text")
+     */
+    private ?string $imageUrl;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -37,6 +42,18 @@ class ArticleCategory
     public function setName(string $name): self
     {
         $this->name = $name;
+
+        return $this;
+    }
+
+    public function getImageUrl(): ?string
+    {
+        return $this->imageUrl;
+    }
+
+    public function setImageUrl(?string $imageUrl): self
+    {
+        $this->imageUrl = $imageUrl;
 
         return $this;
     }

@@ -31,7 +31,8 @@ class ArticleFormType extends AbstractType
         $builder
             ->add('title', TextType::class, ['label' => 'Titre'])
             ->add('category', EntityType::class, ['class' => ArticleCategory::class, 'choice_label' => 'name'])
-            ->add('description', TextType::class, ['label' => 'Description'])
+            ->add('description', TextType::class, ['label' => 'Description', 'required' => false])
+            ->add('imageUrl', TextType::class, ['label' => 'URL de l\'image d\'illustration', 'required' => false, 'empty_data' => null])
             ->add('content', TextareaType::class, ['label' => 'Contenu', 'empty_data' => ''])
             ->add('isPublic', CheckboxType::class, ['label' => 'Est publique', 'required' => false])
             ->add('save', SubmitType::class, ['label' => 'Confirmer']);
