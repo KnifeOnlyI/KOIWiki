@@ -1,8 +1,8 @@
 {% extends 'base.html.twig' %}
 
 {% block meta %}
-    {% set favicon = absolute_url(asset('favicon.ico')) %}
-    {% set image = (article.imageUrl ? article.imageUrl : (article.category.imageUrl ? article.category.imageUrl : favicon)) %}
+    {% set website_logo = absolute_url(asset('images/website_logo.png')) %}
+    {% set image = (article.imageUrl ? article.imageUrl : (article.category.imageUrl ? article.category.imageUrl : website_logo)) %}
 
     <meta name="description" content="{{ article.description }}">
 
