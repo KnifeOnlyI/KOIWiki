@@ -25,8 +25,6 @@
 
     Catégorie : {{ article.category.name }}
 
-    <hr>
-
     {% if canDelete or canEdit %}
         <div class="row">
             <div class="col-12 text-end">
@@ -38,9 +36,9 @@
                 {% endif %}
             </div>
         </div>
-
-        <hr>
     {% endif %}
+
+    <hr>
 
     {% if article.imageUrl %}
         <div class="article-illustration">

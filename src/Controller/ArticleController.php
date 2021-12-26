@@ -109,6 +109,7 @@ class ArticleController extends AbstractController
 
         return $this->render('article/view.html.twig', [
             'title' => $article->getTitle(),
+            'subtitle' => $article->getDescription(),
             'canDelete' => $this->userCanDeleteArticle($this->getUser(), $article),
             'canEdit' => $this->userCanEditArticle($this->getUser(), $article),
             'article' => $article
