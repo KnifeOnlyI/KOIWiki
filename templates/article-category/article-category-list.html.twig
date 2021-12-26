@@ -1,0 +1,34 @@
+{% if categories %}
+    <table class="table text-center">
+        <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Nom</th>
+            <th scope="col"></th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for category in categories %}
+            <tr>
+                <th scope="row">{{ category.id }}</th>
+                <td>{{ category.name }}</td>
+                <td class="text-end">
+                    {% if app.user and 'ROLE_ARTICLE_CATEGORY_DELETE' in app.user.roles %}
+                        <a href="{{ path('delete_article_category', {'id': category.id}) }}" class="btn btn-danger">Supprimer</a>
+                    {% endif %}
+
+                    <a href="{{ path('get_all_articles', {'category': category.id}) }}" class="btn btn-primary">Consulter</a>
+
+                    {% if app.user and 'ROLE_ARTICLE_CATEGORY_EDIT' in app.user.roles %}
+                        <a href="{{ path('edit_article_category', {'id': category.id}) }}"
+                           class="btn btn-secondary">Editer</a>
+                    {% endif %}
+                </td>
+            </tr>
+        {% endfor %}
+        <tr></tr>
+        </tbody>
+    </table>
+{% else %}
+    <p>Aucune catégorie disponible</p>
+{% endif %}

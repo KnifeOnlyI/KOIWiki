@@ -218,9 +218,12 @@ class ArticleController extends AbstractController
             $articles = $this->articleRepository->searchInPublic($query);
         }
 
-        return $this->render('article/list.html.twig', [
-            'title' => 'Recherche d\'articles',
+        $categories = $this->articleCategoryRepository->search($query);
+
+        return $this->render('search/index.html.twig', [
+            'title' => 'Résultats de recherche',
             'articles' => $articles,
+            'categories' => $categories,
             'q' => $query
         ]);
     }

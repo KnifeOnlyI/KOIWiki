@@ -19,6 +19,25 @@ class ArticleCategoryRepository extends ServiceEntityRepository
         parent::__construct($registry, ArticleCategory::class);
     }
 
+    /**
+     * Search in all categories
+     *
+     * @param string $query The search query
+     *
+     * @return ArticleCategory[] The article category list
+     */
+    public function search(string $query): array
+    {
+        $q = strtolower($query);
+
+        return $this
+            ->createQueryBuilder('articleCategory')
+            ->where('lower(articleCategory.name) LIKE \'%' . $q . '%\' OR lower(articleCategory.name) LIKE \'%' . $q . '%\'')
+            ->orderBy('articleCategory.id', 'ASC')
+            ->getQuery()
+            ->getResult();
+    }
+
     // /**
     //  * @return ArticleCategory[] Returns an array of ArticleCategory objects
     //  */
