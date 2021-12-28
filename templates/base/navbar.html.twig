@@ -32,6 +32,14 @@
                         {% endif %}
                     </ul>
                 </li>
+
+                {% for category in articleCategoryService.findAll() %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ path('get_all_articles', {'category': category.id}) }}">
+                            {{ category.name }}
+                        </a>
+                    </li>
+                {% endfor %}
             </ul>
             <form class="d-flex" method="get" action="{{ path('search_article') }}">
                 <input class="form-control me-2" type="search" name="q" placeholder="Rechercher" aria-label="Rechercher"
