@@ -20,6 +20,7 @@
                 <td class="text-end">
                     {% if app.user and (app.user.userIdentifier == article.author.userIdentifier or 'ROLE_ARTICLE_DELETE_PRIVATE' in app.user.roles) %}
                         <a href="{{ path('delete_article', {'id': article.id}) }}" class="btn btn-danger">Supprimer</a>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     {% endif %}
 
                     <a href="{{ path('get_article', {'id': article.id}) }}" class="btn btn-primary">Consulter</a>

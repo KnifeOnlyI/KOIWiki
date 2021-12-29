@@ -15,6 +15,7 @@
                 <td class="text-end">
                     {% if app.user and 'ROLE_ARTICLE_CATEGORY_DELETE' in app.user.roles %}
                         <a href="{{ path('delete_article_category', {'id': category.id}) }}" class="btn btn-danger">Supprimer</a>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     {% endif %}
 
                     <a href="{{ path('get_all_articles', {'category': category.id}) }}" class="btn btn-primary">Consulter</a>

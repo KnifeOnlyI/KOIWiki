@@ -26,15 +26,19 @@
     Catégorie : {{ article.category.name }}
 
     {% if canDelete or canEdit %}
+        <hr>
         <div class="row">
-            <div class="col-12 text-end">
-                {% if canDelete %}
-                    <a class="btn btn-danger" href="{{ path('delete_article', {'id': article.id}) }}">Delete</a>
-                {% endif %}
-                {% if canEdit %}
+            {% if canEdit %}
+                <div class="col text-start">
                     <a class="btn btn-secondary" href="{{ path('edit_article', {'id': article.id}) }}">Edit</a>
-                {% endif %}
-            </div>
+                </div>
+            {% endif %}
+
+            {% if canDelete %}
+                <div class="col text-end">
+                    <a class="btn btn-danger" href="{{ path('delete_article', {'id': article.id}) }}">Delete</a>
+                </div>
+            {% endif %}
         </div>
     {% endif %}
 
